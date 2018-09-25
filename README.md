@@ -18,9 +18,3 @@ Install requirements, e.g. using `pip`:
 ```shell
 $ pip install -r requirements.txt
 ```
-
-Run tests:
-
-```shell
-$ python -m unittest discover -s optics -p '*_test.py'
-```

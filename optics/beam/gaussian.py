@@ -1,4 +1,4 @@
-import numpy as np
+import mpmath as mp
 
 
 class Gaussian:
@@ -19,9 +19,9 @@ class Gaussian:
     """
     Returns the Full Width at Half Maximum at z.
     """
-    z -= self.origin
+    z += self.origin
 
-    return np.sqrt(2 * np.log(2)) * self.waist(z)
+    return mp.sqrt(2 * mp.log(2)) * self.waist(z)
 
   def waist(self, z=0):
     """
@@ -30,18 +30,16 @@ class Gaussian:
     if z == 0:
       return self._waist
 
-    z -= self.origin
-
-    return self._waist * np.sqrt(1 + (z / self.rayleigh)**2)
+    return self._waist * mp.sqrt(1 + (z / self.rayleigh)**2)
 
   def curvature(self, z=0):
     """
     Returns the radius of curvature at z.
     """
-    if z == 0:
-      return np.inf
+    z += self.origin
 
-    z -= self.origin
+    if z == 0:
+      return mp.inf
 
     return z * (1 + (self.rayleigh / z)**2)
 
@@ -49,10 +47,10 @@ class Gaussian:
     """
     Returns the (relative) intensity at (r,z).
     """
-    z -= self.origin
+    z += self.origin
 
     return (self.waist(0) / self.waist(z))**2 * \
-        np.exp(-2 * r**2 / self.waist(z)**2)
+        mp.exp(-2 * r**2 / self.waist(z)**2)
 
   def propagate(self, T):
     """
@@ -63,10 +61,10 @@ class Gaussian:
     q = self.parameter
     q = (T[0, 0] * q + T[0, 1]) / (T[1, 0] * q + T[1, 1])
 
-    z = np.real(q) + z
-    w = np.sqrt(2 * np.imag(q) / k)
+    z = mp.re(q) + z
+    w = mp.sqrt(2 * mp.im(q) / k)
 
-    return Gaussian(waist=w, wavelength=self.wavelength, origin=z)
+    return Gaussian(waist=w, origin=z, wavelength=self.wavelength)
 
   @property
   def origin(self):
@@ -94,7 +92,7 @@ class Gaussian:
     """
     Returns the wavenumber of the beam.
     """
-    return 2 * np.pi / self.wavelength
+    return 2 * mp.pi / self.wavelength
 
   @property
   def wavelength(self):

@@ -1,4 +1,4 @@
-import numpy as np
+import mpmath as mp
 
 
 class Propagation:
@@ -12,7 +12,7 @@ class Propagation:
   def abcd(self):
     d = self._distance
 
-    T = np.identity(2)
+    T = mp.eye(2)
     T[0, 1] = d
 
     return T

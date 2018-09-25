@@ -1,4 +1,4 @@
-import numpy as np
+import mpmath as mp
 
 from optics.geom.propagation import Propagation
 from optics.geom.refraction import Spherical
@@ -15,7 +15,7 @@ class Thin:
   def abcd(self):
     f = self._focal_length
 
-    T = np.identity(2)
+    T = mp.eye(2)
     T[1, 0] = -1 / f
 
     return T
@@ -36,4 +36,4 @@ class Thick:
     T2 = Propagation(self._thickness)
     T3 = Spherical(self._radius2)
 
-    return T3@T2@T1
+    return T3 * T2 * T1

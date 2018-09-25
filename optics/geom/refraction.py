@@ -1,4 +1,4 @@
-import numpy as np
+import mpmath as mp
 
 
 class Planar:
@@ -14,7 +14,7 @@ class Planar:
     n1 = self._n1
     n2 = self._n2
 
-    T = np.identity(2)
+    T = mp.eye(2)
     T[1, 1] = n1 / n2
 
     return T

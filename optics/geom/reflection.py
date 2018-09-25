@@ -1,4 +1,4 @@
-import numpy as np
+import mpmath as mp
 
 
 class Planar:
@@ -7,7 +7,7 @@ class Planar:
   """
 
   def abcd(self):
-    return np.identity(2)
+    return mp.eye(2)
 
 
 class Spherical(Planar):
