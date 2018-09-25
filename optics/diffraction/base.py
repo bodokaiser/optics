@@ -1,7 +1,7 @@
 import mpmath as mp
 
 
-class Base:
+class Diffraction:
   """
   Base class for intensity distribution for a Gaussian beam propagating a
   circular aperture.
@@ -32,6 +32,13 @@ class Base:
     return self._gaussian.waist()
 
   @property
+  def gaussian(self):
+    """
+    Returns the Gaussian beam instance.
+    """
+    return self._gaussian
+
+  @property
   def wavenumber(self):
     """
     Returns the wavenumber of the Gaussian beam propagating through the
@@ -57,43 +64,3 @@ class Base:
 
   def __call__(self, r, z):
     raise NotImplementedError()
-
-
-class Urey(Base):
-  """
-  Radial intensity distribution in the focal plane for a converging Gaussian
-  beam propagating through a circular according to [H. Urey, 2004][1].
-
-  [1]: https://www.osapublishing.org/ao/abstract.cfm?uri=ao-43-3-620
-  """
-
-  @property
-  def focal_ratio(self):
-    """
-    Returns the focal ratio parameter.
-    """
-    return self.focal_length / (2 * self.radius)
-
-  @property
-  def truncation(self):
-    """
-    Returns the truncation parameter.
-    """
-    return self.waist / self.radius
-
-  def __call__(self, r):
-    """
-    Returns the radial intensity distribution at the geometrical focal spot.
-    """
-    T = self.truncation
-    rn = self.normalized_radius(r)
-
-    def fn(u): return u * mp.exp(-(u / T)**2) * mp.besselj(0, mp.pi * u * rn)
-
-    return mp.abs(mp.quad(fn, [0, 1]))**2 / T**2
-
-  def normalized_radius(self, r):
-    """
-    Returns the normalized radius in the focus plane.
-    """
-    return r / (self.wavelength * self.focal_ratio)

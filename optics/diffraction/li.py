@@ -1,10 +1,10 @@
 import mpmath as mp
 
 from optics.math import lommelU, lommelV
-from optics.diffraction.gaussian.circular import Base
+from optics.diffraction.base import Diffraction as BaseDiffraction
 
 
-class Li(Base):
+class Diffraction(BaseDiffraction):
   """
   Intensity distribution near the focal spot for a Gaussian beam propagating
   through a aperture limited lens according to [Y. Li, 1989][1].
@@ -24,7 +24,7 @@ class Li(Base):
     """
     return v**2 / (u**2 + 4 * self.alpha()**2)
 
-  def __call__(self, r, z):
+  def __call__(self, r, z=1e-10):
     """
     Returns the intensity distribution near the focal spot.
     """
