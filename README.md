@@ -1,6 +1,6 @@
-# Aperture focused Gaussian beam
+# Optics
 
-This repository provides the numerical implementation of
+In particular this reporsitor provides a numerical implementation of
 
 1. [Y. Li and F.T.S. Yu, Intensity distribution near the focus of an apertured focused Gaussian beam][1]
 2. [H. Urey, Spot size, depth-of-focus, and diffraction ring intensity formulas for truncated Gaussian beams][2]
