@@ -1,7 +1,7 @@
 import mpmath as mp
 
-from optics.geom.propagation import Propagation
-from optics.geom.refraction import Spherical
+from optics.geometrical.propagation import Propagation
+from optics.geometrical.refraction import Spherical
 
 
 class Thin:

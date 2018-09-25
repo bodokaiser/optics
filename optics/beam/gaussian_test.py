@@ -2,7 +2,7 @@ import unittest
 import mpmath as mp
 
 from optics.beam import GaussianBeam
-from optics.geom import Propagation, ThinLens
+from optics.geometrical import Propagation, ThinLens
 
 
 class TestGaussian(unittest.TestCase):
