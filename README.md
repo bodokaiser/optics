@@ -19,5 +19,8 @@ Install requirements, e.g. using `pip`:
 $ pip install -r requirements.txt
 ```
 
+See the example notebooks in the repository for specific usage or consult the
+source code.
+
 [1]: https://www.sciencedirect.com/science/article/abs/pii/0030401889901971
 [2]: https://www.osapublishing.org/ao/abstract.cfm?uri=ao-43-3-620
