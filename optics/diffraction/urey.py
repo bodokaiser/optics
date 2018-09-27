@@ -30,12 +30,18 @@ class Diffraction(BaseDiffraction):
     Returns the radial intensity distribution at the geometrical focal spot.
     """
     T = self.truncation
+    f = self.focal_ratio
+    l = self.wavelength
+
+    P = 1 - mp.exp(-2 / T**2)
+    I = 8 / (T**2 * P)
+
     rn = self.normalized_radius(r)
 
     def integrand(u):
       return u * mp.exp(-(u / T)**2) * mp.besselj(0, mp.pi * u * rn)
 
-    return abs(mp.quad(integrand, [0, 1]))**2 / T**2
+    return I * abs(mp.quad(integrand, [0, 1]))**2
 
   def normalized_radius(self, r):
     """
